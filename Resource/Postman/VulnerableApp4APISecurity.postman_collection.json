@@ -1,0 +1,2662 @@
+{
+	"info": {
+		"_postman_id": "46cc0dcc-4bd9-4b41-8752-651123a9e260",
+		"name": "VulnerableApp4APISecurity",
+		"description": "This project created for API Security example.\n\nContact Support:\n Name: Erdemstar\n Email: erdem.yildiz@windowslive.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "Account",
+					"item": [
+						{
+							"name": "/api/Account/Login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"irure deserunt magna amet ut\",\n  \"password\": \"officia\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Account/Login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Account",
+										"Login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"irure deserunt magna amet ut\",\n  \"password\": \"officia\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Account/Login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"Login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Account/TemporaryLogin",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Account/TemporaryLogin?Email=ut commodo pariatur non&Password=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Account",
+										"TemporaryLogin"
+									],
+									"query": [
+										{
+											"key": "Email",
+											"value": "ut commodo pariatur non"
+										},
+										{
+											"key": "Password",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Account/TemporaryLogin?Email=ut commodo pariatur non&Password=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"TemporaryLogin"
+											],
+											"query": [
+												{
+													"key": "Email",
+													"value": "ut commodo pariatur non"
+												},
+												{
+													"key": "Password",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Account/Register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"64c261e46132bfaa58624111\",\n  \"createdAt\": \"1990-07-12T01:38:52.898Z\",\n  \"name\": \"Bekçi\",\n  \"surname\": \"Hurşit\",\n  \"email\": \"bekçihurşit@vakifbank.com.tr\",\n  \"password\": \"bekohuro\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Account/Register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Account",
+										"Register"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"elit consequat cillum ipsum\",\n  \"createdAt\": \"1990-07-12T01:38:52.898Z\",\n  \"name\": \"minim veniam incididunt sint Excepteur\",\n  \"surname\": \"irure Duis dolor deserunt qui\",\n  \"email\": \"deserunt veniam non\",\n  \"password\": \"ad Excepteur est\",\n  \"role\": \"ut fugiat dolor\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Account/Register",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"Register"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Account/GetAccount",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Account/GetAccount?email=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Account",
+										"GetAccount"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Account/GetAccount?email=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"GetAccount"
+											],
+											"query": [
+												{
+													"key": "email",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Account/UpdateNameSurnameAccount",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"reprehenderit Duis quis tempor\",\n  \"surname\": \"in fugiat aliquip enim\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Account/UpdateNameSurnameAccount",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Account",
+										"UpdateNameSurnameAccount"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"reprehenderit Duis quis tempor\",\n  \"surname\": \"in fugiat aliquip enim\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Account/UpdateNameSurnameAccount",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"UpdateNameSurnameAccount"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Account/GetAccounts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Account/GetAccounts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Account",
+										"GetAccounts"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Account/GetAccounts",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"GetAccounts"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Account/DeleteAccount",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Account/DeleteAccount?email=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Account",
+										"DeleteAccount"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Account/DeleteAccount?email=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"DeleteAccount"
+											],
+											"query": [
+												{
+													"key": "email",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Card",
+					"item": [
+						{
+							"name": "/api/Card/GetCard",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Card/GetCard",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Card",
+										"GetCard"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Card/GetCard",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Card",
+												"GetCard"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"ut commodo pariatur non\""
+								}
+							]
+						},
+						{
+							"name": "/api/Card/GetCardv2",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Card/GetCardv2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Card",
+										"GetCardv2"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Card/GetCardv2",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Card",
+												"GetCardv2"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Card/CreateCard",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nickname\": \"consequat adipisicing\",\n  \"number\": \"deserunt\",\n  \"expireDate\": \"pariatur\",\n  \"cve\": \"labore ut\",\n  \"password\": \"velit deserunt Excepteur\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Card/CreateCard",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Card",
+										"CreateCard"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"nickname\": \"consequat adipisicing\",\n  \"number\": \"deserunt\",\n  \"expireDate\": \"pariatur\",\n  \"cve\": \"labore ut\",\n  \"password\": \"velit deserunt Excepteur\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Card/CreateCard",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Card",
+												"CreateCard"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Card/DeleteCard",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cardId\": \"dolor\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Card/DeleteCard",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Card",
+										"DeleteCard"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cardId\": \"dolor\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Card/DeleteCard",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Card",
+												"DeleteCard"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Helper",
+					"item": [
+						{
+							"name": "/api/Helper/ShowPorfileAsHtmlFormat",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Helper/ShowPorfileAsHtmlFormat",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Helper",
+										"ShowPorfileAsHtmlFormat"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Helper/ShowPorfileAsHtmlFormat",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Helper",
+												"ShowPorfileAsHtmlFormat"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Helper/SystemDate",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Helper/SystemDate?arguments=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Helper",
+										"SystemDate"
+									],
+									"query": [
+										{
+											"key": "arguments",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Helper/SystemDate?arguments=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Helper",
+												"SystemDate"
+											],
+											"query": [
+												{
+													"key": "arguments",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Helper/UploadFile",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Helper/UploadFile",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Helper",
+										"UploadFile"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"type": "file",
+													"src": []
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Helper/UploadFile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Helper",
+												"UploadFile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Helper/ListUploadedFile",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Helper/ListUploadedFile",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Helper",
+										"ListUploadedFile"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Helper/ListUploadedFile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Helper",
+												"ListUploadedFile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Helper/DownloadImageFromRemote",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Helper/DownloadImageFromRemote?url=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Helper",
+										"DownloadImageFromRemote"
+									],
+									"query": [
+										{
+											"key": "url",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Helper/DownloadImageFromRemote?url=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Helper",
+												"DownloadImageFromRemote"
+											],
+											"query": [
+												{
+													"key": "url",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Helper/DownloadImageFromLocal",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Helper/DownloadImageFromLocal?filename=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Helper",
+										"DownloadImageFromLocal"
+									],
+									"query": [
+										{
+											"key": "filename",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Helper/DownloadImageFromLocal?filename=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Helper",
+												"DownloadImageFromLocal"
+											],
+											"query": [
+												{
+													"key": "filename",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Profile",
+					"item": [
+						{
+							"name": "/api/Profile/GetProfile",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Profile/GetProfile?Email=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Profile",
+										"GetProfile"
+									],
+									"query": [
+										{
+											"key": "Email",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Profile/GetProfile?Email=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Profile",
+												"GetProfile"
+											],
+											"query": [
+												{
+													"key": "Email",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Profile/CreateProfile Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"hobby\": \"sint voluptate\",\n  \"address\": \"est eiusmod\",\n  \"birthday\": \"1946-11-27T14:15:33.669Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Profile/CreateProfile",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Profile",
+										"CreateProfile"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"hobby\": \"sint voluptate\",\n  \"address\": \"est eiusmod\",\n  \"birthday\": \"1946-11-27T14:15:33.669Z\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Profile/CreateProfile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Profile",
+												"CreateProfile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Profile/UpdateProfile",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"hobby\": \"sint voluptate\",\n  \"address\": \"est eiusmod\",\n  \"birthday\": \"1946-11-27T14:15:33.669Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Profile/UpdateProfile",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Profile",
+										"UpdateProfile"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"hobby\": \"sint voluptate\",\n  \"address\": \"est eiusmod\",\n  \"birthday\": \"1946-11-27T14:15:33.669Z\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Profile/UpdateProfile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Profile",
+												"UpdateProfile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Profile/DeleteProfile",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Profile/DeleteProfile?Email=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Profile",
+										"DeleteProfile"
+									],
+									"query": [
+										{
+											"key": "Email",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Profile/DeleteProfile?Email=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Profile",
+												"DeleteProfile"
+											],
+											"query": [
+												{
+													"key": "Email",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Security",
+			"item": [
+				{
+					"name": "API1:2019 - Broken Object Level Authorization",
+					"item": [
+						{
+							"name": "/api/Account/GetAccount Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Account/GetAccount?email=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Account",
+										"GetAccount"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Account/GetAccount?email=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"GetAccount"
+											],
+											"query": [
+												{
+													"key": "email",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Card/DeleteCard Copy",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cardId\": \"dolor\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Card/DeleteCard",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Card",
+										"DeleteCard"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cardId\": \"dolor\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Card/DeleteCard",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Card",
+												"DeleteCard"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "API2:2019 - Broken Authentication",
+					"item": [
+						{
+							"name": "/api/Account/Login Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"irure deserunt magna amet ut\",\n  \"password\": \"officia\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Account/Login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Account",
+										"Login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"irure deserunt magna amet ut\",\n  \"password\": \"officia\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Account/Login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"Login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Profile/DeleteProfile Copy",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Profile/DeleteProfile?Email=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Profile",
+										"DeleteProfile"
+									],
+									"query": [
+										{
+											"key": "Email",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Profile/DeleteProfile?Email=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Profile",
+												"DeleteProfile"
+											],
+											"query": [
+												{
+													"key": "Email",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Profile/GetProfile Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Profile/GetProfile?Email=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Profile",
+										"GetProfile"
+									],
+									"query": [
+										{
+											"key": "Email",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Profile/GetProfile?Email=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Profile",
+												"GetProfile"
+											],
+											"query": [
+												{
+													"key": "Email",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "API3:2019 - Excessive Data Exposure",
+					"item": [
+						{
+							"name": "/api/Card/GetCardv2 Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Card/GetCardv2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Card",
+										"GetCardv2"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Card/GetCardv2",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Card",
+												"GetCardv2"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Helper/ShowPorfileAsHtmlFormat Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Helper/ShowPorfileAsHtmlFormat",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Helper",
+										"ShowPorfileAsHtmlFormat"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Helper/ShowPorfileAsHtmlFormat",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Helper",
+												"ShowPorfileAsHtmlFormat"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Account/TemporaryLogin Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Account/TemporaryLogin?Email=ut commodo pariatur non&Password=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Account",
+										"TemporaryLogin"
+									],
+									"query": [
+										{
+											"key": "Email",
+											"value": "ut commodo pariatur non"
+										},
+										{
+											"key": "Password",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Account/TemporaryLogin?Email=ut commodo pariatur non&Password=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"TemporaryLogin"
+											],
+											"query": [
+												{
+													"key": "Email",
+													"value": "ut commodo pariatur non"
+												},
+												{
+													"key": "Password",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "API4:2019 - Lack of Resources and Rate Limiting",
+					"item": [
+						{
+							"name": "/api/Helper/UploadFile Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Helper/UploadFile",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Helper",
+										"UploadFile"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"type": "file",
+													"src": []
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Helper/UploadFile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Helper",
+												"UploadFile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Helper/DownloadImageFromLocal Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Helper/DownloadImageFromLocal?filename=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Helper",
+										"DownloadImageFromLocal"
+									],
+									"query": [
+										{
+											"key": "filename",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Helper/DownloadImageFromLocal?filename=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Helper",
+												"DownloadImageFromLocal"
+											],
+											"query": [
+												{
+													"key": "filename",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Helper/DownloadImageFromRemote Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Helper/DownloadImageFromRemote?url=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Helper",
+										"DownloadImageFromRemote"
+									],
+									"query": [
+										{
+											"key": "url",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Helper/DownloadImageFromRemote?url=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Helper",
+												"DownloadImageFromRemote"
+											],
+											"query": [
+												{
+													"key": "url",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "API5:2019 - Broken Function Level Authorization",
+					"item": [
+						{
+							"name": "/api/Account/GetAccounts Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Account/GetAccounts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Account",
+										"GetAccounts"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Account/GetAccounts",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"GetAccounts"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "API6:2019 - Mass assignment",
+					"item": [
+						{
+							"name": "/api/Account/Register Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"dolore nostrud officia\",\n  \"createdAt\": \"1945-11-26T10:20:46.528Z\",\n  \"name\": \"mollit qui consectetur\",\n  \"surname\": \"aliquip magna nisi dolore veniam\",\n  \"email\": \"consectetur dolore in minim\",\n  \"password\": \"laboris\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Account/Register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Account",
+										"Register"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"dolore nostrud officia\",\n  \"createdAt\": \"1945-11-26T10:20:46.528Z\",\n  \"name\": \"mollit qui consectetur\",\n  \"surname\": \"aliquip magna nisi dolore veniam\",\n  \"email\": \"consectetur dolore in minim\",\n  \"password\": \"laboris\",\n  \"role\": \"dolor proident in commodo\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Account/Register",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"Register"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "API7:2019 - Security misconfiguration",
+					"item": [
+						{
+							"name": "/api/Card/GetCard Copy",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Card/GetCard",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Card",
+										"GetCard"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Card/GetCard",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Card",
+												"GetCard"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"ut commodo pariatur non\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "API8:2019 - Injection",
+					"item": [
+						{
+							"name": "/api/Account/Register Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"elit consequat cillum ipsum\",\n  \"createdAt\": \"1990-07-12T01:38:52.898Z\",\n  \"name\": \"minim veniam incididunt sint Excepteur\",\n  \"surname\": \"irure Duis dolor deserunt qui\",\n  \"email\": \"deserunt veniam non\",\n  \"password\": \"ad Excepteur est\",\n  \"role\": \"ut fugiat dolor\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Account/Register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Account",
+										"Register"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"elit consequat cillum ipsum\",\n  \"createdAt\": \"1990-07-12T01:38:52.898Z\",\n  \"name\": \"minim veniam incididunt sint Excepteur\",\n  \"surname\": \"irure Duis dolor deserunt qui\",\n  \"email\": \"deserunt veniam non\",\n  \"password\": \"ad Excepteur est\",\n  \"role\": \"ut fugiat dolor\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Account/Register",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Account",
+												"Register"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Profile/CreateProfile",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"hobby\": \"sint voluptate\",\n  \"address\": \"est eiusmod\",\n  \"birthday\": \"1946-11-27T14:15:33.669Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Profile/CreateProfile",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Profile",
+										"CreateProfile"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"hobby\": \"sint voluptate\",\n  \"address\": \"est eiusmod\",\n  \"birthday\": \"1946-11-27T14:15:33.669Z\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Profile/CreateProfile",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Profile",
+												"CreateProfile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Helper/ShowPorfileAsHtmlFormat Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Helper/ShowPorfileAsHtmlFormat",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Helper",
+										"ShowPorfileAsHtmlFormat"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Helper/ShowPorfileAsHtmlFormat",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Helper",
+												"ShowPorfileAsHtmlFormat"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Helper/DownloadImageFromLocal Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Helper/DownloadImageFromLocal?filename=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Helper",
+										"DownloadImageFromLocal"
+									],
+									"query": [
+										{
+											"key": "filename",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Helper/DownloadImageFromLocal?filename=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Helper",
+												"DownloadImageFromLocal"
+											],
+											"query": [
+												{
+													"key": "filename",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Helper/DownloadImageFromRemote Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Helper/DownloadImageFromRemote?url=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Helper",
+										"DownloadImageFromRemote"
+									],
+									"query": [
+										{
+											"key": "url",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Helper/DownloadImageFromRemote?url=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Helper",
+												"DownloadImageFromRemote"
+											],
+											"query": [
+												{
+													"key": "url",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Helper/SystemDate Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Helper/SystemDate?arguments=ut commodo pariatur non",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Helper",
+										"SystemDate"
+									],
+									"query": [
+										{
+											"key": "arguments",
+											"value": "ut commodo pariatur non"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Helper/SystemDate?arguments=ut commodo pariatur non",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Helper",
+												"SystemDate"
+											],
+											"query": [
+												{
+													"key": "arguments",
+													"value": "ut commodo pariatur non"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	]
+}

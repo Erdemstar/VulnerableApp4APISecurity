@@ -1,0 +1,82 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Entities\" />
+    <None Remove="Mapper\" />
+    <None Remove="DTO\" />
+    <None Remove="Interfaces\" />
+    <None Remove="Entities\Base\" />
+    <None Remove="Interfaces\Entities\" />
+    <None Remove="Interfaces\Entities\Base\" />
+    <None Remove="Entities\Card\" />
+    <None Remove="Entities\Account\" />
+    <None Remove="Entities\Profile\" />
+    <None Remove="Interfaces\DTO\" />
+    <None Remove="Interfaces\DTO\Base\" />
+    <None Remove="DTO\Base\" />
+    <None Remove="DTO\Account\" />
+    <None Remove="DTO\Card\" />
+    <None Remove="DTO\Others\" />
+    <None Remove="DTO\Profile\" />
+    <None Remove="Interfaces\DTO\Others\" />
+    <None Remove="DTO\Others\Response\" />
+    <None Remove="Interfaces\DTO\Others\Response\" />
+    <None Remove="DTO\Others\Response\Base\" />
+    <None Remove="DTO\Others\Response\Success\" />
+    <None Remove="DTO\Others\Response\Failed\" />
+    <None Remove="Interfaces\Repositories\" />
+    <None Remove="Interfaces\Mapper\" />
+    <None Remove="Interfaces\Mapper\Base\" />
+    <None Remove="Interfaces\Repositories\Base\" />
+    <None Remove="Interfaces\Repositories\Account\" />
+    <None Remove="Interfaces\Repositories\Profile\" />
+    <None Remove="Interfaces\Repositories\Card\" />
+    <None Remove="Interfaces\Utility\" />
+    <None Remove="Interfaces\Utility\JWT\" />
+    <None Remove="Interfaces\Utility\Database\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Mapper\" />
+    <Folder Include="DTO\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Entities\Base\" />
+    <Folder Include="Interfaces\Entities\" />
+    <Folder Include="Interfaces\Entities\Base\" />
+    <Folder Include="Entities\Card\" />
+    <Folder Include="Entities\Account\" />
+    <Folder Include="Entities\Profile\" />
+    <Folder Include="Interfaces\DTO\" />
+    <Folder Include="Interfaces\DTO\Base\" />
+    <Folder Include="DTO\Base\" />
+    <Folder Include="DTO\Account\" />
+    <Folder Include="DTO\Card\" />
+    <Folder Include="DTO\Others\" />
+    <Folder Include="DTO\Profile\" />
+    <Folder Include="Interfaces\DTO\Others\" />
+    <Folder Include="DTO\Others\Response\" />
+    <Folder Include="Interfaces\DTO\Others\Response\" />
+    <Folder Include="DTO\Others\Response\Base\" />
+    <Folder Include="DTO\Others\Response\Success\" />
+    <Folder Include="DTO\Others\Response\Failed\" />
+    <Folder Include="Interfaces\Repositories\" />
+    <Folder Include="Interfaces\Mapper\" />
+    <Folder Include="Interfaces\Mapper\Base\" />
+    <Folder Include="Interfaces\Repositories\Base\" />
+    <Folder Include="Interfaces\Repositories\Account\" />
+    <Folder Include="Interfaces\Repositories\Profile\" />
+    <Folder Include="Interfaces\Repositories\Card\" />
+    <Folder Include="Interfaces\Utility\" />
+    <Folder Include="Interfaces\Utility\JWT\" />
+    <Folder Include="Interfaces\Utility\Database\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
+  </ItemGroup>
+</Project>
