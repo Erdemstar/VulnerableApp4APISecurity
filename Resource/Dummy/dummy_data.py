@@ -8,8 +8,8 @@ import sys
 class RequestHelper():
 
     def __init__(self):
-        self.proxy = {"http":"http://localhost:8080"}
-        #self.proxy = ""
+        #self.proxy = {"http":"http://localhost:8080"}
+        self.proxy = ""
    
     def GET(self,url,jwt:None):
         if jwt is None:
