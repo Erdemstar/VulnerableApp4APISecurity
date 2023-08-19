@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Amazon.Runtime.Internal;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VulnerableApp4APISecurity.Core.DTO.Card;
@@ -23,11 +24,14 @@ namespace VulnerableApp4APISecurity.API.Controllers
     {
         private readonly CardRepository _cardRepository;
         private readonly JWTAuthManager _jwtAuthManager;
+        private readonly IMapper _mapper;
 
-        public CardController(CardRepository cardRepository, JWTAuthManager jWTAuthManager)
+
+        public CardController(CardRepository cardRepository, JWTAuthManager jWTAuthManager,IMapper mapper)
         {
             _cardRepository = cardRepository;
             _jwtAuthManager = jWTAuthManager;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -57,7 +61,7 @@ namespace VulnerableApp4APISecurity.API.Controllers
             {
                 return Ok(new SuccessResponse { Message = "There is no card" });
             }
-            return Ok(card);
+            return Ok(_mapper.Map<List<GetCardResponse>>(card));
         }
 
 
@@ -66,17 +70,11 @@ namespace VulnerableApp4APISecurity.API.Controllers
         public async Task<ActionResult> CreateCard(CardCreateRequest request)
         {
             var UserId = _jwtAuthManager.TakeUserIdFromJWT(Request.Headers["Authorization"].ToString().Split(" ")[1]);
-            CardEntity entity = new CardEntity
-            {
-                UserId = UserId,
-                Nickname = request.Nickname,
-                Number = request.Number,
-                ExpireDate = request.ExpireDate,
-                Cve = request.Cve,
-                Password = request.Password
-            };
 
-            await _cardRepository.CreateAsync(entity);
+            var card = _mapper.Map<CardEntity>(request);
+            card.UserId = UserId;
+
+            await _cardRepository.CreateAsync(card);
 
             return Ok(new SuccessResponse { Message = "Card is created" });
         }

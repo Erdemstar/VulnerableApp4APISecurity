@@ -73,6 +73,27 @@ class RandomDataHelper():
     
     def integer(self,r):
         return ''.join(random.choice(string.digits+ string.digits) for _ in range(r)) 
+    
+    def userGenerate(self):
+        name = self.string()
+        surname = self.string()
+        password = self.string()
+        email = name + surname + "@gmail.com"
+        return name,surname,password,email
+    
+    def profileGenerate(self):
+        hobby = self.string()
+        address = self.string()
+        date = "2023-07-18T12:46:07.806Z"
+        return hobby,address,date
+
+    def cardGenerate(self):
+        card_name = self.string()
+        card_number = str(ccard.visa())
+        card_date = "12/25"
+        card_cve = self.integer(3)
+        card_pass = self.string()
+        return card_name,card_number,card_date,card_cve,card_pass
 
 class VulnerableApp4API():
 
@@ -140,7 +161,7 @@ class VulnerableApp4API():
             self.console_log(1, "Account Gets request is sent")
             PATH = "/api/Account/GetAccounts"
             result = self.request_helper.GET(self.base_url + PATH,self.token)
-            #self.console_log(1,result)
+            self.console_log(1,result)
             return result
         except:
             self.console_log(2, "Account Gets request is failed while sent")
@@ -309,20 +330,11 @@ def user_main(BASE_URL):
 
     r = RandomDataHelper()
 
-    name = r.string()
-    surname = r.string()
-    password = r.string()
-    email = name + surname + "@gmail.com"
+    name,surname,password,email = r.userGenerate()
 
-    hobby = r.string()
-    address = r.string()
-    date = "2023-07-18T12:46:07.806Z"
+    hobby,address,date = r.profileGenerate()
 
-    card_name = r.string()
-    card_number = str(ccard.visa())
-    card_date = "12/25"
-    card_cve = r.integer(3)
-    card_pass = r.string()
+    card_name,card_number,card_date,card_cve,card_pass = r.cardGenerate()
 
 
     updated_name = r.string()
@@ -360,6 +372,9 @@ def user_main(BASE_URL):
     v.card_create(card_name,card_number,card_date,card_cve,card_pass) # ok
     v.card_get()
     temp_card_id = v.card_getv2()
+    
+    card_name,card_number,card_date,card_cve,card_pass = r.cardGenerate()
+
     v.card_create(card_name,card_number,card_date,card_cve,card_pass) # ok
     v.card_getv2()
     v.card_delete(json.loads(temp_card_id)[0]["id"])
@@ -383,15 +398,9 @@ def admin_main(BASE_URL):
     email = "erdem@star.com"
     password = "erdem"
 
-    hobby = r.string()
-    address = r.string()
-    date = "2023-07-18T12:46:07.806Z"
+    hobby,address,date = r.profileGenerate()
 
-    card_name = r.string()
-    card_number = str(ccard.visa())
-    card_date = "05/2029"
-    card_cve = r.integer(3)
-    card_pass = r.string()
+    card_name,card_number,card_date,card_cve,card_pass = r.cardGenerate()
 
     updated_hobby = r.string()
     updated_address = r.string()
@@ -425,7 +434,10 @@ def admin_main(BASE_URL):
     v.card_create(card_name,card_number,card_date,card_cve,card_pass)
     v.card_get()
     temp_card_id = v.card_getv2()
+    
+    card_name,card_number,card_date,card_cve,card_pass = r.cardGenerate()
     v.card_create(card_name,card_number,card_date,card_cve,card_pass)
+
     v.card_getv2()
     v.card_delete(json.loads(temp_card_id)[0]["id"])
     v.card_getv2()

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using Amazon.Runtime.Internal;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VulnerableApp4APISecurity.Core.DTO.Others.Response.Failed;
@@ -24,20 +19,32 @@ namespace VulnerableApp4APISecurity.API.Controllers
 
         private readonly ProfileRepository _profileRepository;
         private readonly JWTAuthManager _jwtAuthManager;
+        private readonly IMapper _mapper;
 
-        public ProfileController(ProfileRepository profileRepository, JWTAuthManager jwtAuthManager)
+
+        public ProfileController(ProfileRepository profileRepository, JWTAuthManager jwtAuthManager, IMapper mapper)
         {
             _profileRepository = profileRepository;
             _jwtAuthManager = jwtAuthManager;
+            _mapper = mapper;
         }
 
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> GetProfile([FromQuery] ProfileSearchRequest request)
         {
-            if (request.Email is not null) {
+            if (request.Email is not null)
+            {
                 var profile = await _profileRepository.GetProfileByEmail(request.Email);
-                return Ok(profile);
+
+                if (profile is not null)
+                {
+                    return Ok(_mapper.Map<ProfileResponse>(profile));
+
+                }
+
+                return BadRequest(new FailedResponse() { Message = "There is no Profile." });
+
             }
             return BadRequest(new FailedResponse() { Message = "Please enter Email and try again." });
             
@@ -52,15 +59,12 @@ namespace VulnerableApp4APISecurity.API.Controllers
             var profile = await _profileRepository.GetProfileByEmail(email);
             if (profile is null)
             {
-                var prof = await _profileRepository.CreateAsync(new ProfileEntity
-                {
-                    Email = email,
-                    Address = request.Address,
-                    Birthday = request.Birthday,
-                    Hobby = request.Hobby
-                });
+                var profil = _mapper.Map<ProfileEntity>(request);
+                profil.Email = email;
 
-                return Ok(new ProfileResponse { Address = prof.Address, Birthday = prof.Birthday, Hobby = prof.Hobby });
+                var prof = await _profileRepository.CreateAsync(profil);
+
+                return Ok(_mapper.Map<ProfileResponse>(prof));
             }
 
             return BadRequest(new FailedResponse() { Message = "Profile is already created." });
@@ -74,15 +78,13 @@ namespace VulnerableApp4APISecurity.API.Controllers
             var profile = await _profileRepository.GetProfileByEmail(email);
             if (profile.Id is not null)
             {
-                await _profileRepository.UpdateAsync(profile.Id, new ProfileEntity
-                {
-                    Id = profile.Id,
-                    Address = request.Address,
-                    Birthday = request.Birthday,
-                    Hobby = request.Hobby,
-                    Email = email,
-                });
-                return Ok(request);
+                var profil = _mapper.Map<ProfileEntity>(request);
+                profil.Email = email;
+                profil.Id = profile.Id;
+                  
+                await _profileRepository.UpdateAsync(profile.Id,profil);
+
+                return Ok(_mapper.Map<ProfileResponse>(request));
             }
 
             return BadRequest(new FailedResponse() { Message = "Profile is not created yet. This process can be done after profile is created." });

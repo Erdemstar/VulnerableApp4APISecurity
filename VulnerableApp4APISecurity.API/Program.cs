@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+﻿using System.Text;
 using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using VulnerableApp4APISecurity.Core.Interfaces.Utility.Database;
 using VulnerableApp4APISecurity.Core.Interfaces.Utility.JWT;
@@ -14,10 +13,14 @@ using VulnerableApp4APISecurity.Infrastructure.Utility.JWT;
 using VulnerableApp4APISecurity.Infrastructure.Repositories.Account;
 using VulnerableApp4APISecurity.Infrastructure.Repositories.Card;
 using VulnerableApp4APISecurity.Infrastructure.Repositories.Profile;
-
-
+using VulnerableApp4APISecurity.Core.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+//Mapper
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
 
 // Add services to the container.
 
@@ -55,19 +58,16 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-//mapper
 
 builder.Services.Configure<JWTSettings>(builder.Configuration.GetSection(nameof(JWTSettings)));
 builder.Services.AddSingleton<IJWTSettings>(sp => sp.GetRequiredService<IOptions<JWTSettings>>().Value);
-
 
 builder.Services.AddSingleton<IDatabaseSettings>(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection(nameof(DatabaseSettings)));
 
 
-//.Services.AddSingleton(mapper);
 builder.Services.AddSingleton<JWTAuthManager>();
-builder.Services.AddSingleton<AccountRepository>();
+builder.Services.AddSingleton<AccountRepository >();
 builder.Services.AddSingleton<ProfileRepository>();
 builder.Services.AddSingleton<CardRepository>();
 
