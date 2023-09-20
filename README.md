@@ -30,22 +30,22 @@ The vulnerabilities on the developed application are as follows. While some of t
 -  **API 06:2019** — Mass assignment
 -  **API 07:2019** — Security misconfiguration
 -  **API 08:2019** — Injection
--  **API 09:2019** — ~~Improper Assets Management~~
--  **API 10:2019** — Insufficient logging and monitoring : *soon*
+-  **API 09:2019** — Improper Assets Management : *soon*
+-  **API 10:2019** — Insufficient logging and monitoring
 
 
 ## 2 - Run
 Below is an explanation for running the developed application.
 
 ### 2.1 -  Running via IDE
-Since the project was developed with .NET 7.0, it can be run platform-independently. For this, if you have .NET 7.0 SDK and Visual Studio in terms of easy use, it will be enough for it to work and analyze.
+Since the project was developed with .NET 7.0, it can be run platform-independently. For this, if you have .NET 7.0 SDK and Visual Studio in terms of easy use, it will be enough for it to work and analyze. 
 ```
 git clone https://github.com/Erdemstar/VulnerableApp4APISecurity
 cd VulnerableApp4APISecurity 
 - mouse click on reflected-xss-tag-attribute-src.sln
 - devenv reflected-xss-tag-attribute-src.sln (CMD)
 ```
-**NOTE** : When the application is up, you can use/edit the Database settings from the appsettings.json section.
+**NOTE** : When the application is up, you can use/edit the Database settings from the appsettings.json section. Apart from this, once the application is up and running, not only the database is needed, but also elasticsearch and Promethous integration is available if needed. You can review docker-compose for details.
 
 ### 2.2 - Running from Container
 You can use one of the following images to run through the container.

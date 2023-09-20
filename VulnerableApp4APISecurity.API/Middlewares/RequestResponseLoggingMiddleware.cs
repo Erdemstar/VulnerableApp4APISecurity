@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-
-namespace VulnerableApp4APISecurity.API.Middlewares
+﻿namespace VulnerableApp4APISecurity.API.Middlewares
 {
     public class RequestResponseLoggingMiddleware
     {
@@ -34,24 +26,24 @@ namespace VulnerableApp4APISecurity.API.Middlewares
 
         private void LogRequest(HttpRequest request)
         {
-            _logger.LogInformation($"Request received: {request.Method} {request.Path}");
-            _logger.LogInformation($"Request headers: {GetHeadersAsString(request.Headers)}");
+            _logger.LogInformation($"{Environment.NewLine}--- HTTP REQUEST ---{Environment.NewLine}" +
+                                   $"Schema:{request.Scheme} {Environment.NewLine}" + 
+                                   $"Method:{request.Method} {Environment.NewLine}" +
+                                   $"Host: {request.Host} {Environment.NewLine}" +
+                                   $"Path: {request.Path} {Environment.NewLine}" +
+                                   $"QueryString: {request.QueryString} {Environment.NewLine}");
+
         }
+
 
         private void LogResponse(HttpResponse response)
         {
-            _logger.LogInformation($"Response sent: {response.StatusCode}");
-            _logger.LogInformation($"Response headers: {GetHeadersAsString(response.Headers)}");
-        }
+            _logger.LogInformation($"{Environment.NewLine} --- HTTP RESPONSE ---{Environment.NewLine}" +
+                                   $"StatusCode:{response.StatusCode} {Environment.NewLine}" +
+                                   $"Headers: {response.Headers} {Environment.NewLine}" +
+                                   $"ContentType: {response.ContentType} {Environment.NewLine}" +
+                                   $"Cookies: {response.Cookies} {Environment.NewLine}");
 
-        private string GetHeadersAsString(IHeaderDictionary headers)
-        {
-            var stringBuilder = new StringBuilder();
-            foreach (var (key, value) in headers)
-            {
-                stringBuilder.AppendLine($"{key}: {value}");
-            }
-            return stringBuilder.ToString();
         }
     }
 

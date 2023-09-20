@@ -1,36 +1,114 @@
 services:
   mongo:
-    image: mongo:4.4
+    image: mongo:4.4.24
     container_name: mongo
-    environment:
-        - MONGO_INITDB_ROOT_USERNAME=root
-        - MONGO_INITDB_ROOT_PASSWORD=password
-    restart: unless-stopped
-    ports:
-      - "27017:27017"
+    restart: always
     volumes:
       - ./database/db:/data/db
       - ./database/dev.archive:/Databases/dev.archive
       - ./database/production:/Databases/production
+    ports:
+      - "27017:27017"
+    networks:
+      - db-logging
+ 
   mongo-express:
     image: mongo-express
     container_name: mexpress
+    restart: always
     environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
-      - ME_CONFIG_MONGODB_URL=mongodb://root:password@mongo:27017/?authSource=admin
-      - ME_CONFIG_BASICAUTH_USERNAME=mexpress
-      - ME_CONFIG_BASICAUTH_PASSWORD=mexpress
+      - ME_CONFIG_MONGODB_URL=mongodb://mongo:27017/?authSource=admin
+      - ME_CONFIG_BASICAUTH_USERNAME=erdemstar
+      - ME_CONFIG_BASICAUTH_PASSWORD=erdemstar
     links:
       - mongo
-    restart: unless-stopped
+    depends_on:
+      - mongo
     ports:
       - "8081:8081"
+    networks:
+      - db-logging
+
   vulnerableapp4apisecurity:
-    image: erdemstar/test
+    image: erdemstar/vulnerableapp4apisecurity:arm64
     container_name: vulnerableapp4apisecurity
+    restart: always
     links:
       - mongo
-    restart: unless-stopped
+    depends_on:
+      - mongo
     ports:
-      - "9999:80"
+      - "7080:80"
+    networks:
+      - db-logging
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.9.1
+    container_name: elasticsearch
+    restart: always
+    environment:
+      - xpack.security.enabled=false
+      - xpack.watcher.enabled=false 
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m" 
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ./elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - db-logging
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:8.9.1
+    restart: always
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200    # address of elasticsearch docker container which kibana will connect
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+    networks:
+      - db-logging
+
+  prometheus:
+    image: ubuntu/prometheus
+    container_name: prometheus
+    restart: always
+    ports:
+      - "9090:9090"
+    environment:
+      - TZ=UTC
+    volumes:
+      - ./prom/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - db-logging
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana-data/data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - db-logging
+
+networks:
+  db-logging:
+    driver: bridge
+
+volumes:
+  elasticsearch-data:

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Amazon.Runtime.Internal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using VulnerableApp4APISecurity.Core.DTO.Others.Response.Failed;
 using VulnerableApp4APISecurity.Core.DTO.Others.Response.Success;
 using VulnerableApp4APISecurity.Infrastructure.Repositories.Account;
@@ -35,6 +36,23 @@ namespace VulnerableApp4APISecurity.API.Controllers
             _jwtAuthManager = jWTAuthManager;
 
             FileUploadPath = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("FileUploadPath").Value;
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<ActionResult> ShowLog()
+        {
+            try
+            {
+                var logs = await System.IO.File.ReadAllTextAsync("./Log/Serilog.txt");
+                return Ok(new SuccessResponse{ Message = logs });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new FailedResponse { Message = "There is a problem while show log " + ex.ToString() });
+            }
+            
         }
 
         [Authorize(Roles = "Admin,User")]

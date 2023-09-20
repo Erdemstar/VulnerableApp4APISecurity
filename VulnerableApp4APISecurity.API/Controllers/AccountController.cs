@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using VulnerableApp4APISecurity.Core.DTO.Account;
 using VulnerableApp4APISecurity.Core.DTO.Others.Response.Failed;
 using VulnerableApp4APISecurity.Core.DTO.Others.Response.Success;
+using VulnerableApp4APISecurity.Core.DTO.Others.Response.Token;
 using VulnerableApp4APISecurity.Core.Entities.Account;
 using VulnerableApp4APISecurity.Infrastructure.Repositories.Account;
 using VulnerableApp4APISecurity.Infrastructure.Utility.JWT;
@@ -42,7 +43,7 @@ namespace VulnerableApp4APISecurity.API.Controllers
 
                 var token = _jwtAuthManager.GenerateTokens(account);
 
-                return Ok(token);
+                return Ok(new TokenResponse {token = token });
             }
 
             return BadRequest(new FailedResponse() { Message = "Your email or password is empty. Please fill all and try again." });
@@ -62,7 +63,7 @@ namespace VulnerableApp4APISecurity.API.Controllers
 
                 var token = _jwtAuthManager.GenerateTokens(account);
 
-                return Ok(token);
+                return Ok(new TokenResponse { token = token });
             }
 
             return BadRequest(new FailedResponse() { Message = "Your email or password is empty. Please fill all and try again." });

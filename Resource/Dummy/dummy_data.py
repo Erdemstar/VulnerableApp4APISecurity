@@ -8,8 +8,8 @@ import sys
 class RequestHelper():
 
     def __init__(self):
-        #self.proxy = {"http":"http://localhost:8080"}
-        self.proxy = ""
+        self.proxy = {"http":"http://localhost:8080"}
+        #self.proxy = ""
    
     def GET(self,url,jwt:None):
         if jwt is None:
@@ -110,7 +110,7 @@ class VulnerableApp4API():
             PATH = "/api/Account/Login"
             data = {"email":email ,"password":password}
             result = self.request_helper.POST(self.base_url+PATH,None,data)
-            self.token = result
+            self.token = json.loads(result)["token"]
             self.console_log(1,self.token)
         except:
             self.console_log(2, "Account Login request is failed while sent")
@@ -291,6 +291,15 @@ class VulnerableApp4API():
         except:
             self.console_log(2, "Helper ListUploadedFile request is failed while sent")
 
+    def helper_ShowLog(self):
+        try:
+            self.console_log(1, "Helper ShowLog request is sent")
+            PATH = "/api/Helper/ShowLog"
+            result = self.request_helper.GET(self.base_url + PATH,self.token)
+            self.console_log(1,result)
+        except:
+            self.console_log(2, "Helper ShowLog request is failed while sent")
+
 
     def helper_ShowPorfileAsHtmlFormat(self):
         try:
@@ -390,6 +399,7 @@ def user_main(BASE_URL):
     v.helper_UploadFile()
     v.helper_listUploadFile() # ok
     v.helper_ShowPorfileAsHtmlFormat() # ok
+    #v.helper_ShowLog()
 
 def admin_main(BASE_URL):
 
@@ -452,6 +462,7 @@ def admin_main(BASE_URL):
     v.helper_UploadFile()
     v.helper_listUploadFile()
     v.helper_ShowPorfileAsHtmlFormat()
+    v.helper_ShowLog()
 
 if len(sys.argv) == 3:
     url = sys.argv[1]
