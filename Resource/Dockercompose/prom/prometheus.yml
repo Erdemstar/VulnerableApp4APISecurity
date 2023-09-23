@@ -10,21 +10,12 @@ alerting:
     static_configs:
     - targets: []
 scrape_configs:
-- job_name: vulnerableapp4apisecurity-local
-  honor_timestamps: true
-  scrape_interval: 15s  
-  scrape_timeout: 10s  
-  metrics_path: /metrics  
-  scheme: http  
-  static_configs:  
-  - targets:  
-    - host.docker.internal:7080
 - job_name: vulnerableapp4apisecurity-container
   honor_timestamps: true
-  scrape_interval: 15s  
-  scrape_timeout: 10s  
-  metrics_path: /metrics  
-  scheme: http  
-  static_configs:  
-  - targets:  
-    - vulnerableapp4apisecurity:7080
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+  - targets:
+    - vulnerableapp4apisecurity:80

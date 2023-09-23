@@ -421,10 +421,10 @@ def admin_main(BASE_URL):
     # Account
     v.account_login(email,password)
     result = v.account_gets() # ok
-    if json.loads(result)[3]["email"] == email:
-        v.account_delete(json.loads(result)[2]["email"]) # ok
-    else:
-        v.account_delete(json.loads(result)[3]["email"]) # ok
+
+    if len(json.loads(result)) % 2 == 0:
+        v.account_delete(json.loads(result)[1]["email"])
+
     v.account_gets()
     
     # PROFILE

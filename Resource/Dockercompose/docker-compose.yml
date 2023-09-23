@@ -10,8 +10,8 @@ services:
     ports:
       - "27017:27017"
     networks:
-      - db-logging
- 
+      - compose_network
+
   mongo-express:
     image: mongo-express
     container_name: mexpress
@@ -27,7 +27,7 @@ services:
     ports:
       - "8081:8081"
     networks:
-      - db-logging
+      - compose_network
 
   vulnerableapp4apisecurity:
     image: erdemstar/vulnerableapp4apisecurity:arm64
@@ -40,16 +40,16 @@ services:
     ports:
       - "7080:80"
     networks:
-      - db-logging
+      - compose_network
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.9.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.2
     container_name: elasticsearch
     restart: always
     environment:
       - xpack.security.enabled=false
-      - xpack.watcher.enabled=false 
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m" 
+      - xpack.watcher.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - discovery.type=single-node
     ulimits:
       memlock:
@@ -65,7 +65,7 @@ services:
     ports:
       - 9200:9200
     networks:
-      - db-logging
+      - compose_network
 
   kibana:
     container_name: kibana
@@ -78,7 +78,7 @@ services:
     depends_on:
       - elasticsearch
     networks:
-      - db-logging
+      - compose_network
 
   prometheus:
     image: ubuntu/prometheus
@@ -91,12 +91,13 @@ services:
     volumes:
       - ./prom/prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
-      - db-logging
+      - compose_network
 
   grafana:
     image: grafana/grafana
     container_name: grafana
     restart: always
+    user: "0"
     ports:
       - "3000:3000"
     volumes:
@@ -104,11 +105,8 @@ services:
     depends_on:
       - prometheus
     networks:
-      - db-logging
+      - compose_network
 
 networks:
-  db-logging:
+  compose_network:
     driver: bridge
-
-volumes:
-  elasticsearch-data:
