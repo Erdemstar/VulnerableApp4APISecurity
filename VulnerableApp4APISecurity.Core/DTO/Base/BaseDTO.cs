@@ -1,11 +1,7 @@
-﻿using System;
-using VulnerableApp4APISecurity.Core.Interfaces.DTO.Base;
+﻿using VulnerableApp4APISecurity.Core.Interfaces.DTO.Base;
 
-namespace VulnerableApp4APISecurity.Core.DTO.Base
+namespace VulnerableApp4APISecurity.Core.DTO.Base;
+
+public class BaseDTO : IBaseDTO
 {
-	public class BaseDTO: IBaseDTO
-	{
-		
-	}
 }
-

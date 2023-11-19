@@ -1,9 +1,6 @@
-﻿using System;
-namespace VulnerableApp4APISecurity.Core.Interfaces.DTO.Others.Response
-{
-	public interface IBaseResponse
-	{
-        string Message { get; set; }
-    }
-}
+﻿namespace VulnerableApp4APISecurity.Core.Interfaces.DTO.Others.Response;
 
+public interface IBaseResponse
+{
+    string Message { get; set; }
+}

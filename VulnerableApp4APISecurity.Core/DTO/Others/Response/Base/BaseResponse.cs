@@ -1,11 +1,8 @@
-﻿using System;
-using VulnerableApp4APISecurity.Core.Interfaces.DTO.Others.Response;
+﻿using VulnerableApp4APISecurity.Core.Interfaces.DTO.Others.Response;
 
-namespace VulnerableApp4APISecurity.Core.DTO.Others.Response.Base
+namespace VulnerableApp4APISecurity.Core.DTO.Others.Response.Base;
+
+public class BaseResponse : IBaseResponse
 {
-	public class BaseResponse: IBaseResponse
-	{
-        public string? Message { get; set; }
-    }
+    public string? Message { get; set; }
 }
-

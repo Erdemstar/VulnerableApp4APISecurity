@@ -1,167 +1,177 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using VulnerableApp4APISecurity.Core.DTO.Account;
 using VulnerableApp4APISecurity.Core.DTO.Others.Response.Failed;
 using VulnerableApp4APISecurity.Core.DTO.Others.Response.Success;
 using VulnerableApp4APISecurity.Core.DTO.Others.Response.Token;
+using VulnerableApp4APISecurity.Core.DTO.RefreshToken;
 using VulnerableApp4APISecurity.Core.Entities.Account;
+using VulnerableApp4APISecurity.Core.Entities.RefreshToken;
 using VulnerableApp4APISecurity.Infrastructure.Repositories.Account;
+using VulnerableApp4APISecurity.Infrastructure.Repositories.RefreshToken;
 using VulnerableApp4APISecurity.Infrastructure.Utility.JWT;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+namespace VulnerableApp4APISecurity.API.Controllers;
 
-namespace VulnerableApp4APISecurity.API.Controllers
+[Route("api/[controller]/[action]")]
+[ApiController]
+public class AccountController : Controller
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    public class AccountController : Controller
+    private readonly AccountRepository _accountRepository;
+    private readonly JWTAuthManager _jwtAuthManager;
+    private readonly IMapper _mapper;
+    private readonly RefreshTokenRepository _refreshTokenRepository;
+
+    public AccountController(AccountRepository accountRepository, RefreshTokenRepository refreshTokenRepository,
+        JWTAuthManager jwtAuthManager,
+        IMapper mapper)
     {
-        private readonly AccountRepository _accountRepository;
-        private readonly JWTAuthManager _jwtAuthManager;
-        private readonly IMapper _mapper;
+        _accountRepository = accountRepository;
+        _refreshTokenRepository = refreshTokenRepository;
+        _jwtAuthManager = jwtAuthManager;
+        _mapper = mapper;
+    }
 
-        public AccountController(AccountRepository accountRepository, JWTAuthManager jwtAuthManager, IMapper mapper)
-        {
-            _accountRepository = accountRepository;
-            _jwtAuthManager = jwtAuthManager;
-            _mapper = mapper;
-        }
-
-        [AllowAnonymous]
-        [HttpPost]
-        public async Task<ActionResult> Login([FromBody] LoginRequest request)
-        {
-
-            if (request.Email is not null && request.Password is not null)
+    [SwaggerOperation(Summary = "Vulnerability = Multiple Request can be sent. " +
+                                "Category = API 04:2019 - Lack of resources and rate limiting, API 02:2019 - Broken authentication")]
+    [AllowAnonymous]
+    [HttpPost]
+    public async Task<ActionResult> Login([FromBody] LoginRequest request)
+    {
+        if (request.Email is null || request.Password is null)
+            return BadRequest(new FailedResponse
+                { Message = "Your email or password is empty. Please fill all and try again." });
+        
+        var account = await _accountRepository.GetAccountByEmailPassword(request.Email, request.Password);
+        if (account is null)
+            return BadRequest(new FailedResponse
             {
-                var account = await _accountRepository.GetAccountByEmailPassword(request.Email, request.Password);
-                if (account is null)
-                {
-                    return BadRequest(new FailedResponse() { Message = "There is and error while login process. Please control your email or password" });
-                }
-
-                var token = _jwtAuthManager.GenerateTokens(account);
-
-                return Ok(new TokenResponse {token = token });
-            }
-
-            return BadRequest(new FailedResponse() { Message = "Your email or password is empty. Please fill all and try again." });
-        }
-
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<ActionResult> TemporaryLogin([FromQuery] LoginRequest request)
-        {
-            if (request.Email is not null && request.Password is not null)
-            {
-                var account = await _accountRepository.GetAccountByEmailPassword(request.Email, request.Password);
-                if (account is null)
-                {
-                    return BadRequest(new FailedResponse() { Message = "There is and error while login process. Please control your email or password" });
-                }
-
-                var token = _jwtAuthManager.GenerateTokens(account);
-
-                return Ok(new TokenResponse { token = token });
-            }
-
-            return BadRequest(new FailedResponse() { Message = "Your email or password is empty. Please fill all and try again." });
-
-        }
-
-        [AllowAnonymous]
-        [HttpPost]
-        public async Task<ActionResult> Register([FromBody] AccountEntity request)
-        {
-
-            if (request.Email is not null)
-            {
-                var account = await _accountRepository.GetAccountByEmail(request.Email);
-                if (account != null)
-                {
-                    return BadRequest(new FailedResponse() { Message = "The email address which you provided is using another user." });
-                }
-
-                if (request.Role is null) { request.Role = "User"; }
-
-                await _accountRepository.CreateAsync(request);
-
-                var result = _mapper.Map<AccountResponse>(account);
-
-                return Ok(result);
-            }
-
-            return BadRequest(new FailedResponse() { Message = "Your email is empty. Please fill all and try again." });
-        }
-
-
-        [Authorize(Roles = "Admin,User")]
-        [HttpGet]
-        public async Task<ActionResult> GetAccount([FromQuery] string email)
-        {
-            //email adresindeki kullanıcıları getir.
-            var account = await _accountRepository.GetAccountByEmail(email);
-            if (account is null)
-            {
-                return BadRequest(new FailedResponse { Message = "There is no profile using email address whhich provided" });
-            }
-
-            var result = _mapper.Map<AccountResponse>(account);
-
-            return Ok(result);
-        }
-
-        [Authorize(Roles = "Admin,User")]
-        [HttpPut]
-        public async Task<ActionResult> UpdateNameSurnameAccount([FromBody] UpdateNameSurnameRequest request)
-        {
-            var email = _jwtAuthManager.TakeEmailFromJWT(Request.Headers["Authorization"].ToString().Split(" ")[1]);
-            var account = await _accountRepository.GetAccountByEmail(email);
-            if (account.Id is null)
-            {
-                return BadRequest(new FailedResponse { Message = "There is an error while getting Acccount information" });
-            }
-
-            var updated = await _accountRepository.UpdateAsync(account.Id, new AccountEntity
-            {
-                Id = account.Id,
-                Name = request.Name,
-                Surname = request.Surname,
-                Email = account.Email,
-                Password = account.Password,
-                CreatedAt = account.CreatedAt,
-                Role = account.Role
+                Message = "There is an error while login process. Please control your email or password"
             });
-            return Ok(new SuccessResponse { Message = "Account's Name and Surname are updated" });
-        }
 
+        var token = _jwtAuthManager.GenerateToken(account);
+        
+        var getUserRefreshToken =
+            await _refreshTokenRepository.GetAsync(userToken => userToken.email == request.Email);
 
-        [Authorize(Roles = "Admin,User")]
-        [HttpGet]
-        public async Task<ActionResult> GetAccounts()
+        if (getUserRefreshToken is null)
         {
-            var accounts = await _accountRepository.GetAllAsync();
-            if (accounts is null)
+            var userRefreshToken = new CreateRefreshToken
             {
-                return BadRequest(new FailedResponse { Message = "There is no profile" });
-            }
-
-            return Ok(_mapper.Map<List<AccountResponse>>(accounts));
+                email = account.Email,
+                refreshToken = token.refreshToken
+            };
+            
+            await _refreshTokenRepository.CreateAsync(_mapper.Map<RefreshTokenEntity>(userRefreshToken));
         }
-
-        [Authorize(Roles = "Admin")]
-        [HttpDelete]
-        public async Task<ActionResult> DeleteAccount([FromQuery] string email)
+        else
         {
-            var account = await _accountRepository.GetAccountByEmail(email);
-            if (account is null)
-            {
-                return BadRequest(new FailedResponse { Message = "There is no account with start email address which you entered" });
-            }
-            var result = _accountRepository.DeleteAccountByEmail(email);
-            return Ok(new SuccessResponse { Message = "User which you provided is deleted" });
+            getUserRefreshToken.refreshToken = token.refreshToken;
+            await _refreshTokenRepository.UpdateAsync(getUserRefreshToken.Id, getUserRefreshToken);
         }
+
+        return Ok(token);
+
+    }
+
+    [SwaggerOperation(Summary = "Vulnerability = Multiple Request in Query String (Sensitive data is sending at URL). " +
+                                "Category = API 04:2019 - Lack of resources and rate limiting, API 02:2019 - Broken authentication")]
+    [AllowAnonymous]
+    [HttpGet]
+    public async Task<ActionResult> TemporaryLogin([FromQuery] LoginRequest request)
+    {
+        if (request.Email is null || request.Password is null)
+            return BadRequest(new FailedResponse
+                { Message = "Your email or password is empty. Please fill all and try again." });
+        
+        var account = await _accountRepository.GetAccountByEmailPassword(request.Email, request.Password);
+        if (account is null)
+            return BadRequest(new FailedResponse
+            {
+                Message = "There is an error while login process. Please control your email or password"
+            });
+
+        var token = _jwtAuthManager.GenerateToken(account);
+        
+        var getUserRefreshToken =
+            await _refreshTokenRepository.GetAsync(userToken => userToken.email == request.Email);
+
+        if (getUserRefreshToken is null)
+        {
+            var userRefreshToken = new CreateRefreshToken
+            {
+                email = account.Email,
+                refreshToken = token.refreshToken
+            };
+            
+            await _refreshTokenRepository.CreateAsync(_mapper.Map<RefreshTokenEntity>(userRefreshToken));
+        }
+        else
+        {
+            getUserRefreshToken.refreshToken = token.refreshToken;
+            await _refreshTokenRepository.UpdateAsync(getUserRefreshToken.Id, getUserRefreshToken);
+        }
+
+        return Ok(token);
+
+    }
+
+    [SwaggerOperation(Summary = "Vulnerability = Mass Assigment and Email Detection attack. " +
+                                "Category = API 02:2019 - Broken authentication, API 06:2019 - Mass assignment, API 08:2019 - Injection")]
+    [AllowAnonymous]
+    [HttpPost]
+    public async Task<ActionResult> Register([FromBody] AccountEntity request)
+    {
+        if (request.Email is null)
+            return BadRequest(new FailedResponse { Message = "Your email is empty. Please fill all and try again." });
+       
+        var account = await _accountRepository.GetAccountByEmail(request.Email);
+        if (account is not null)
+            return BadRequest(new FailedResponse
+                { Message = "The email address which you provided is using another user." });
+
+        request.Role ??= "User";
+        await _accountRepository.CreateAsync(request);
+        var result = _mapper.Map<AccountResponse>(account);
+        return Ok(new SuccessResponse() { Message = "Account is created"});
+
+    }
+
+    [SwaggerOperation(Summary = "This endpoint can be use when token is not working and replace new one sending refresh token.")]
+    [AllowAnonymous]
+    [HttpPost]
+    public async Task<ActionResult> RefreshToken([FromBody] RequestRefresToken request)
+    {
+        if (request.refreshToken is null)
+            return BadRequest(new FailedResponse
+                { Message = "Your refreshToken is empty. Please fill all and try again." });
+        
+        var refreshToken = await _refreshTokenRepository.GetAsync(refreshToken =>
+            refreshToken.refreshToken == request.refreshToken);
+
+        if (refreshToken is null)
+            return BadRequest(new FailedResponse
+            {
+                Message = "There is no refreshToken which you entered."
+            });
+
+        var account = await _accountRepository.GetAccountByEmail(refreshToken.email);
+        var token = _jwtAuthManager.GenerateToken(account);
+
+        refreshToken.refreshToken = token.refreshToken;
+        await _refreshTokenRepository.UpdateAsync(refreshToken.Id, refreshToken);
+
+        return Ok(token);
+
+    }
+
+    [SwaggerOperation(Summary = "This endpoint can be use either token is valid or not.")]
+    [Authorize(Roles = "User,Admin")]
+    [HttpGet]
+    public ActionResult TokenStatus()
+    {
+        return Ok(new TokenStatus { status = "Token is valid" });
     }
 }
-

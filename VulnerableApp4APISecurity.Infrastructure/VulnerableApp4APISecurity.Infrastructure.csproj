@@ -1,40 +1,39 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Repositories\" />
-    <None Remove="Utility\" />
-    <None Remove="Utility\JWT\" />
-    <None Remove="Utility\Database\" />
-    <None Remove="Repositories\Base\" />
-    <None Remove="Repositories\Account\" />
-    <None Remove="Repositories\Card\" />
-    <None Remove="Repositories\Profile\" />
-    <None Remove="Security\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-    <Folder Include="Utility\" />
-    <Folder Include="Utility\JWT\" />
-    <Folder Include="Utility\Database\" />
-    <Folder Include="Repositories\Base\" />
-    <Folder Include="Repositories\Account\" />
-    <Folder Include="Repositories\Card\" />
-    <Folder Include="Repositories\Profile\" />
-    <Folder Include="Security\" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="7.0.10" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.10" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\VulnerableApp4APISecurity.Core\VulnerableApp4APISecurity.Core.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Remove="Repositories\"/>
+        <None Remove="Utility\"/>
+        <None Remove="Utility\JWT\"/>
+        <None Remove="Utility\Database\"/>
+        <None Remove="Repositories\Base\"/>
+        <None Remove="Repositories\Account\"/>
+        <None Remove="Repositories\Card\"/>
+        <None Remove="Repositories\Profile\"/>
+        <None Remove="Security\"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Utility\"/>
+        <Folder Include="Utility\JWT\"/>
+        <Folder Include="Utility\Database\"/>
+        <Folder Include="Repositories\Base\"/>
+        <Folder Include="Repositories\Account\"/>
+        <Folder Include="Repositories\Card\"/>
+        <Folder Include="Repositories\Profile\"/>
+        <Folder Include="Security\"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="MongoDB.Driver" Version="2.21.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="7.0.10"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.10"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\VulnerableApp4APISecurity.Core\VulnerableApp4APISecurity.Core.csproj"/>
+    </ItemGroup>
 </Project>

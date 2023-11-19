@@ -1,28 +1,22 @@
-﻿using System.Text;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-
-using VulnerableApp4APISecurity.Core.Mapping;
-using VulnerableApp4APISecurity.Core.Interfaces.Utility.Database;
-using VulnerableApp4APISecurity.Core.Interfaces.Utility.JWT;
-
-using VulnerableApp4APISecurity.Infrastructure.Utility.Database;
-using VulnerableApp4APISecurity.Infrastructure.Utility.JWT;
-using VulnerableApp4APISecurity.Infrastructure.Repositories.Account;
-using VulnerableApp4APISecurity.Infrastructure.Repositories.Card;
-using VulnerableApp4APISecurity.Infrastructure.Repositories.Profile;
-
+using Prometheus;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.Elasticsearch;
-
-using Prometheus;
+using VulnerableApp4APISecurity.API.Extension;
+using VulnerableApp4APISecurity.Core.Interfaces.Utility.Database;
+using VulnerableApp4APISecurity.Core.Interfaces.Utility.JWT;
+using VulnerableApp4APISecurity.Core.Mapping;
+using VulnerableApp4APISecurity.Infrastructure.Repositories.Account;
+using VulnerableApp4APISecurity.Infrastructure.Repositories.Card;
+using VulnerableApp4APISecurity.Infrastructure.Repositories.Profile;
+using VulnerableApp4APISecurity.Infrastructure.Repositories.RefreshToken;
+using VulnerableApp4APISecurity.Infrastructure.Utility.Database;
+using VulnerableApp4APISecurity.Infrastructure.Utility.JWT;
 
 var LoggerConfig = new ConfigurationBuilder()
-    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile("appsettings.json", false, true)
     .Build();
 
 Log.Logger = new LoggerConfiguration()
@@ -49,62 +43,31 @@ Log.Logger = new LoggerConfiguration()
 
 try
 {
-
     var builder = WebApplication.CreateBuilder(args);
 
-    // Serilog
+    //Serilog
     builder.Host.UseSerilog();
 
     //Mapper
     builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-    // Add services to the container.
-    builder.Services.AddAuthentication(x =>
-    {
-        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    }).AddJwtBearer(x =>
-    {
-        x.RequireHttpsMetadata = false;
-        x.SaveToken = true;
-        x.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = false,
-            ValidateAudience = false,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["JWTSettings:Issuer"],
-            ValidAudience = builder.Configuration["JWTSettings:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWTSettings:Key"]))
-
-        };
-    });
+    //Extension
+    builder.AddAppSwaggerExtension();
+    builder.AddAppJWTExtension();
 
     builder.Services.AddControllers();
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen(c =>
-    {
-        c.SwaggerDoc("v1", new OpenApiInfo
-        {
-            Version = "v1",
-            Title = "VulnerableApp4APISecurity",
-            Description = "This repository was developed using .NET 7.0 API technology based on findings listed in the OWASP 2019 API Security Top 10. ",
-            Contact = new OpenApiContact() { Name = "Erdemstar", Email = "erdem.yildiz@windowslive.com" },
-        });
-    });
 
-
+    //Custom DI
     builder.Services.Configure<JWTSettings>(builder.Configuration.GetSection(nameof(JWTSettings)));
-    builder.Services.AddSingleton<IJWTSettings>(sp => sp.GetRequiredService<IOptions<JWTSettings>>().Value);
-
-    builder.Services.AddSingleton<IDatabaseSettings>(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
     builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection(nameof(DatabaseSettings)));
-
-
+    
+    builder.Services.AddSingleton<IJWTSettings>(sp => sp.GetRequiredService<IOptions<JWTSettings>>().Value);
+    builder.Services.AddSingleton<IDatabaseSettings>(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
     builder.Services.AddSingleton<JWTAuthManager>();
     builder.Services.AddSingleton<AccountRepository>();
     builder.Services.AddSingleton<ProfileRepository>();
     builder.Services.AddSingleton<CardRepository>();
+    builder.Services.AddSingleton<RefreshTokenRepository>();
 
     builder.Services.AddHealthChecks();
 
@@ -117,10 +80,10 @@ try
 
     app.UseSerilogRequestLogging(options =>
     {
-        // // Emit debug-level events instead of the defaults
+        //Emit debug-level events instead of the defaults
         options.GetLevel = (_, _, _) => LogEventLevel.Debug;
 
-        // Attach additional properties to the request completion event
+        //Attach additional properties to the request completion event
         options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
         {
             diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
@@ -147,18 +110,14 @@ try
 
     app.UseSwagger();
 
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "VulnerableApp4APISecurity");
-    });
+    app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "VulnerableApp4APISecurity"); });
 
     app.MapControllers();
 
-    // Promethous Log
+    //Prometheus Log
     app.MapMetrics();
 
     app.Run();
-
 }
 catch (Exception ex)
 {
