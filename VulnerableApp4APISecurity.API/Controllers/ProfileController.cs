@@ -69,7 +69,6 @@ public class ProfileController : Controller
             Name = user.Name,
             Surname = user.Surname,
             Email = user.Email,
-            Password = user.Password,
             Address = profile.Address,
             Birhtday = profile.Birthday.ToString(),
             Hobby = profile.Hobby

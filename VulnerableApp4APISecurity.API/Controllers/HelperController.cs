@@ -33,9 +33,9 @@ public class HelperController : Controller
     }
 
 
-    [SwaggerOperation(Summary = "Vulnerability = Un authenticated request. " +
-                                "Category = API 02:2019 - Broken authentication, API 03:2019 - Excessive data exposure, API 04:2019 - Lack of resources and rate limiting.")]
-    [AllowAnonymous]
+    [SwaggerOperation(Summary = "Shows system logs. Requires Admin role. Vulnerability: Exposes potentially sensitive log data (API 03:2019), " +
+                                "and could be abused for DoS if logs are very large (API 04:2019 - Lack of resources and rate limiting).")]
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public async Task<ActionResult> ShowLog()
     {
@@ -50,44 +50,23 @@ public class HelperController : Controller
         }
     }
 
-    [SwaggerOperation(Summary = "Vulnerability = Parameter Fuzz then Remote Code Execution. " +
-                                "Category = API 06:2019 - Mass assignment, API 08:2019 — Injection.")]
+    [SwaggerOperation(Summary = "Returns the current system date and time. " +
+                                "Previously vulnerable to Command Injection (API 08:2019), now remediated.")]
 
     [Authorize(Roles = "Admin,User")]
     [HttpGet]
-    public ActionResult SystemDate([FromQuery] string? arguments)
+    public ActionResult SystemDate()
     {
-        var payload = "date" + arguments;
-        var shellName = "/bin/bash";
-        var argsPrepend = "-c ";
-
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-        {
-            shellName = @"C:\Windows\System32\cmd.exe";
-            argsPrepend = "/c ";
-        }
-
         try
         {
-            var process = new Process
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = shellName,
-                    Arguments = argsPrepend + "\"" + payload + "\"",
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false
-                }
-            };
-            process.Start();
-            var output = process.StandardOutput.ReadToEnd();
-            process.WaitForExit();
-            return Ok(new SuccessResponse { Message = output });
+            // Get current date and time using .NET's built-in functionality
+            var currentDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss zzz");
+            return Ok(new SuccessResponse { Message = $"Current system date and time: {currentDateTime}" });
         }
         catch (Exception ex)
         {
-            return BadRequest(new FailedResponse { Message = ex.ToString() });
+            // Log the exception ex
+            return StatusCode(500, new FailedResponse { Message = "An error occurred while retrieving the system date." });
         }
     }
 

@@ -80,13 +80,43 @@ public class CardController : Controller
     [Authorize(Roles = "Admin,User")]
     public async Task<ActionResult> DeleteCard(DeleteCardRequest request)
     {
-        if (request.CardId == null)
+        if (string.IsNullOrEmpty(request.CardId))
             return BadRequest(new FailedResponse
                 { Message = "CardId is empty. Please enter CardId and try again your request." });
+
+        var authHeader = Request.Headers["Authorization"].ToString();
+        if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith("Bearer "))
+        {
+            // This should ideally be caught by the [Authorize] attribute itself
+            return Unauthorized(new FailedResponse { Message = "Authorization header is missing or invalid." });
+        }
+        var token = authHeader.Split(" ")[1];
+
+        var userId = _jwtAuthManager.TakeUserIdFromJWT(token);
+        if (string.IsNullOrEmpty(userId))
+        {
+            // This implies an issue with the token's content or JWT parsing if [Authorize] passed
+            return Unauthorized(new FailedResponse { Message = "Invalid token or unable to identify user from token." });
+        }
+
+        // Retrieve the card to check ownership
+        var card = await _cardRepository.GetByIdAsync(request.CardId);
+        if (card == null)
+        {
+            return NotFound(new FailedResponse { Message = "Card not found." });
+        }
+
+        // Check if the card belongs to the user OR if the user is an Admin.
+        // User.IsInRole("Admin") correctly uses the ClaimsPrincipal.
+        if (card.UserId != userId && !User.IsInRole("Admin"))
+        {
+            return Forbid(); // User is not the owner and not an Admin.
+        }
         
+        // At this point, user is either the owner or an Admin.
         var result = await _cardRepository.DeleteCard(request.CardId);
         return result
-            ? Ok(new SuccessResponse { Message = "Card is deleted" })
-            : BadRequest(new FailedResponse { Message = "There is a problem while card delete" });
+            ? Ok(new SuccessResponse { Message = "Card is deleted." })
+            : BadRequest(new FailedResponse { Message = "There was a problem deleting the card. It might have been already deleted or an internal error occurred." });
     }
 }
