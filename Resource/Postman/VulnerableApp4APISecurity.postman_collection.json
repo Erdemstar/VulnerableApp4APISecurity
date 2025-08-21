@@ -165,7 +165,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"id\": \"64c261e46132bfaa58624111\",\n  \"createdAt\": \"1990-07-12T01:38:52.898Z\",\n  \"name\": \"Bekçi\",\n  \"surname\": \"Hurşit\",\n  \"email\": \"bekçihurşit@vakifbank.com.tr\",\n  \"password\": \"bekohuro\"\n}",
+									"raw": "{\n  \"id\": \"64c261e46132bfaa58624111\",\n  \"createdAt\": \"1990-07-12T01:38:52.898Z\",\n  \"name\": \"Bekçi\",\n  \"surname\": \"Hurşit\",\n  \"email\": \"bekçihurşit@erdemstar.com.tr\",\n  \"password\": \"bekohuro\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
